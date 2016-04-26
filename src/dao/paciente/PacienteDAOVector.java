@@ -1,6 +1,7 @@
 package dao.paciente;
 
 import model.Paciente;
+import utils.Utils;
 import csv.CSVFile;
 
 public class PacienteDAOVector implements PacienteDAO {
@@ -19,7 +20,10 @@ public class PacienteDAOVector implements PacienteDAO {
 	public Paciente getPacienteByRG(String rg) {
 		Paciente founded = null;
 		for (int i = 0; i < pacientes.length; i++) {
-			founded = pacientes[i].getRg().equals(rg)? pacientes[i]: null;
+			if(pacientes[i].getRg().equals(rg)){
+				founded = pacientes[i];
+			}
+//			return founded = pacientes[i].getRg().equals(rg)? pacientes[i]: null;
 		}
 		return founded;
 	}

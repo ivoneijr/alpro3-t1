@@ -33,11 +33,13 @@ public class Main {
 	static CSVFile pacientesFile = new CSVFile();
 	static CSVFile medicamentosFile = new CSVFile();
 	
-	static PacienteDAOVector pacienteVector = new PacienteDAOVector(9826);
-	static MedicamentoDAOVector medicamentoVector = new MedicamentoDAOVector(9826);
+	static PacienteDAOVector vectorPaciente = new PacienteDAOVector(9826);
+	static MedicamentoDAOVector vectorMedicamento = new MedicamentoDAOVector(9871);
 	
-	static PacienteDAOLista pacienteList = new PacienteDAOLista();
-	static MedicamentoDAOLista medicamentoList = new MedicamentoDAOLista();
+	static PacienteDAOLista listPaciente = new PacienteDAOLista();
+	static MedicamentoDAOLista listMedicamento = new MedicamentoDAOLista();
+	
+	static boolean sortByVector = false;
 
 	public static void main(String[] args) {
 		try {
@@ -53,6 +55,7 @@ public class Main {
 					initVectors();
 					sort(VECTOR);
 					print(VECTOR);
+					sortByVector = true;
 				break;
 				
 				case LIST:
@@ -68,12 +71,26 @@ public class Main {
 			
 			switch(criteria) {
 				case Constants.FIND_PACIENTES_BY_RG:
+					System.out.println("Digite um RG para pesquisar: ");
+					String rg = input.nextLine();
+					if(sortByVector){
+						System.out.println("Encontrado Paciente: " + vectorPaciente.getPacienteByRG(rg));
+					}else{
+						System.out.println("Encontrado Paciente: " + listPaciente.getPacienteByRG(rg));
+					}
 				break;
 				
 				case Constants.FIND_PACIENTES_BY_NOME:
 				break;
 				
 				case Constants.FIND_MEDICAMENTOS_BY_CODIGO:
+					System.out.println("Digite um Codigo de medicamento para pesquisar: ");
+					Long codigo = Long.parseLong(input.nextLine());
+					if(sortByVector){
+						System.out.println("Encontrado Medicamento: " + vectorMedicamento.getMedicamento(codigo));
+					}else{
+						System.out.println("Encontrado Medicamento: " + listMedicamento.getMedicamento(codigo));
+					}
 				break;
 				
 				case Constants.FIND_MEDICAMENTOS_BY_NOME:
@@ -91,20 +108,20 @@ public class Main {
 	private static void print(int list) {
 		switch (sortMethod) {
 		case VECTOR:
-			for (int i = 0; i < pacienteVector.getPacientes().length; i++) {
-				System.out.println(pacienteVector.getPacientes()[i].toString());
+			for (int i = 0; i < vectorPaciente.getPacientes().length; i++) {
+				System.out.println(vectorPaciente.getPacientes()[i].toString());
 			}
-			for (int i = 0; i < medicamentoVector.getMedicamentos().length; i++) {
-				System.out.println(medicamentoVector.getMedicamentos()[i].toString());
+			for (int i = 0; i < vectorMedicamento.getMedicamentos().length; i++) {
+				System.out.println(vectorMedicamento.getMedicamentos()[i].toString());
 			}
 			break;
 		
 		case LIST:
-			for (int i = 0; i < pacienteList.getPacientes().size(); i++) {
-				System.out.println(pacienteList.getPacientes().get(i).toString());
+			for (int i = 0; i < listPaciente.getPacientes().size(); i++) {
+				System.out.println(listPaciente.getPacientes().get(i).toString());
 			}
-			for (int i = 0; i < medicamentoList.getMedicamentos().size(); i++) {
-				System.out.println(medicamentoList.getMedicamentos().get(i).toString());
+			for (int i = 0; i < listMedicamento.getMedicamentos().size(); i++) {
+				System.out.println(listMedicamento.getMedicamentos().get(i).toString());
 			}
 			break;
 		}		
@@ -113,33 +130,33 @@ public class Main {
 	private static void sort(int vector) {
 		switch (sortMethod) {
 		case VECTOR:
-			Utils.doSelectionSort(pacienteVector.getPacientes());
-			Utils.doSelectionSort(medicamentoVector.getMedicamentos());
+			Utils.doSelectionSort(vectorPaciente.getPacientes());
+			Utils.doSelectionSort(vectorMedicamento.getMedicamentos());
 			break;
 		
 		case LIST:
-			Utils.doInsertionSortPaciente(pacienteList.getPacientes());
-			Utils.doInsertionSortMedicamento(medicamentoList.getMedicamentos());
+			Utils.doInsertionSortPaciente(listPaciente.getPacientes());
+			Utils.doInsertionSortMedicamento(listMedicamento.getMedicamentos());
 			break;
 		}	
 	}
 
 	private static void initLists() {
 		for (int i = 0; i < 9826; i++) {
-			pacienteList.addPaciente((Paciente) pacientesFile.readObject());
+			listPaciente.addPaciente((Paciente) pacientesFile.readObject());
 		}
 		for (int i = 0; i < 9871; i++) {
-			medicamentoList.addMedicamento((Medicamento) medicamentosFile.readObject());
+			listMedicamento.addMedicamento((Medicamento) medicamentosFile.readObject());
 		}
 	}
 
 	private static void initVectors() {
-		for (int i = 0; i < pacienteVector.getPacientes().length; i++) {
-			pacienteVector.addPaciente((Paciente) pacientesFile.readObject());
+		for (int i = 0; i < vectorPaciente.getPacientes().length; i++) {
+			vectorPaciente.addPaciente((Paciente) pacientesFile.readObject());
 		}
 
-		for (int i = 0; i < medicamentoVector.getMedicamentos().length; i++) {
-			medicamentoVector.addMedicamento((Medicamento) medicamentosFile.readObject());
+		for (int i = 0; i < vectorMedicamento.getMedicamentos().length; i++) {
+			vectorMedicamento.addMedicamento((Medicamento) medicamentosFile.readObject());
 		}
 	}
 

@@ -18,9 +18,13 @@ public class MedicamentoDAOVector implements MedicamentoDAO {
 
 	@Override
 	public Medicamento getMedicamento(Long codigo) {
+		
 		Medicamento founded = null;
 		for (int i = 0; i < medicamentos.length; i++) {
-			founded = medicamentos[i].getCodigo().equals(codigo)? medicamentos[i]: null;
+			if(medicamentos[i].getCodigo().equals(codigo)){
+				founded = medicamentos[i]; 
+			}
+//			return founded = medicamentos[i].getCodigo() == codigo? medicamentos[i]: null;
 		}
 		return founded;
 	}
