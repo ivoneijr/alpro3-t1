@@ -18,10 +18,10 @@ import model.Paciente;
 import parsers.MedicamentoParser;
 import parsers.PacienteParser;
 import utils.Utils;
-import dao.medicamento.MedicamentoDAOLista;
-import dao.medicamento.MedicamentoDAOVector;
-import dao.paciente.PacienteDAOLista;
-import dao.paciente.PacienteDAOVector;
+import dao.java.implementation.medicamento.MedicamentoDAOLista;
+import dao.java.implementation.medicamento.MedicamentoDAOVector;
+import dao.java.implementation.paciente.PacienteDAOLista;
+import dao.java.implementation.paciente.PacienteDAOVector;
 
 public class Main {
 	
@@ -131,7 +131,7 @@ public class Main {
 		switch (sortMethod) {
 		case VECTOR:
 			Utils.doSelectionSort(vectorPaciente.getPacientes());
-			Utils.doSelectionSort(vectorMedicamento.getMedicamentos());
+			Utils.doSelectionSortMedicamento(vectorMedicamento.getMedicamentos());
 			break;
 		
 		case LIST:

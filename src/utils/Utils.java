@@ -62,7 +62,8 @@ public class Utils {
 	    }
 	    return pacientes;
 	}
-	public static Medicamento[] doSelectionSort(Medicamento[] arr) {
+	
+	public static Medicamento[] doSelectionSortMedicamento(Medicamento[] arr) {
 		for (int i = 0; i < arr.length - 1; ++i) {
 			int minIndex = i;
 			for (int j = i + 1; j < arr.length; ++j) {
@@ -90,4 +91,5 @@ public class Utils {
 		}
 		return medicamentos;
 	}
+	
 }

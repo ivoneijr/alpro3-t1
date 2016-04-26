@@ -1,4 +1,4 @@
-package dao.paciente;
+package dao.java.implementation.paciente;
 
 import model.Paciente;
 import utils.Utils;

@@ -1,4 +1,4 @@
-package dao.medicamento;
+package dao.java.implementation.medicamento;
 
 import java.util.ArrayList;
 import java.util.Iterator;
