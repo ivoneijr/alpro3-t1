@@ -1,7 +1,8 @@
-package dao.java.implementation.paciente;
+package dao.paciente;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import model.Paciente;
 import csv.CSVFile;
@@ -26,6 +27,20 @@ public class PacienteDAOLista implements PacienteDAO {
 			}
 		}
 		return founded;
+	}
+
+	@Override
+	public List<Paciente> getPacienteByNome(String nome) {
+		List<Paciente> list = new ArrayList<Paciente>();
+		
+		Iterator<Paciente> iterator = pacientes.iterator();
+		while(iterator.hasNext()){
+			Paciente paciente = iterator.next();
+			if(paciente.getNome().matches(".*"+nome+".*")){
+				list.add(paciente);
+			}
+		}
+		return list;
 	}
 
 	@Override

@@ -1,4 +1,7 @@
-package dao.java.implementation.medicamento;
+package dao.medicamento;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Medicamento;
 import model.Paciente;
@@ -24,7 +27,17 @@ public class MedicamentoDAOVector implements MedicamentoDAO {
 			if(medicamentos[i].getCodigo().equals(codigo)){
 				founded = medicamentos[i]; 
 			}
-//			return founded = medicamentos[i].getCodigo() == codigo? medicamentos[i]: null;
+		}
+		return founded;
+	}
+
+	@Override
+	public List<Medicamento> getMedicamentoByNome(String nome) {
+		List<Medicamento> founded = new ArrayList<Medicamento>();
+		for (int i = 0; i < medicamentos.length; i++) {
+			if(medicamentos[i].getNome().matches(".*"+nome+".*")){
+				founded.add(medicamentos[i]); 
+			}
 		}
 		return founded;
 	}
@@ -56,4 +69,5 @@ public class MedicamentoDAOVector implements MedicamentoDAO {
 	public Medicamento[] getMedicamentos() {
 		return medicamentos;
 	}
+
 }

@@ -20,12 +20,13 @@ public class Utils {
 	}
 	
 	public static void printFindMenu(){
-		System.out.println("====   Selecione o critério de pesquisa   ===="); 
+		System.out.println("\n\n");
+		System.out.println("====   Selecione o critério de pesquisa  ===="); 
 		System.out.println("=                                           ="); 
 		System.out.println("=         1 - Paciente (por RG)             ="); 
-//		System.out.println("=         2 - Paciente (por nome)           ="); 
+		System.out.println("=         2 - Paciente (por nome)           ="); 
 		System.out.println("=         3 - Medicamento (por codigo)      ="); 
-//		System.out.println("=         4 - Medicamento (por nome)        ="); 
+		System.out.println("=         4 - Medicamento (por nome)        ="); 
 		System.out.println("=                                           ="); 
 		System.out.println("============================================="); 
 	}
@@ -90,6 +91,10 @@ public class Utils {
 			medicamentos.set(j,key);
 		}
 		return medicamentos;
+	}
+
+	public static Long hexaToLongDecimal(String hexa) {
+		return Long.parseLong(hexa,16);
 	}
 	
 }

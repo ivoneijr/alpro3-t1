@@ -1,4 +1,7 @@
-package dao.java.implementation.paciente;
+package dao.paciente;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Paciente;
 import utils.Utils;
@@ -23,9 +26,19 @@ public class PacienteDAOVector implements PacienteDAO {
 			if(pacientes[i].getRg().equals(rg)){
 				founded = pacientes[i];
 			}
-//			return founded = pacientes[i].getRg().equals(rg)? pacientes[i]: null;
 		}
 		return founded;
+	}
+	
+	@Override
+	public List<Paciente> getPacienteByNome(String nome) {
+		List<Paciente> list = new ArrayList<Paciente>();
+		for (int i = 0; i < pacientes.length; i++) {
+			if(pacientes[i].getNome().matches(".*"+nome+".*")){
+				list.add(pacientes[i]);
+			}
+		}
+		return list;
 	}
 
 	@Override
@@ -55,4 +68,6 @@ public class PacienteDAOVector implements PacienteDAO {
 	public Paciente[] getPacientes() {
 		return pacientes;
 	}
+
+	
 }
